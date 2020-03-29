@@ -1,0 +1,15 @@
+{
+  "editor.tabSize": 4,
+  "typescript.preferences.quoteStyle": "single",
+  "editor.formatOnPaste": true,
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.endWithNewline": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
+  "editor.formatOnSave": false,
+  "tslint.jsEnable": true
+}

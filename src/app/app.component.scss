@@ -1,0 +1,199 @@
+$code__margin-bottom: 4vh;
+
+$round__margin-bottom: 2vh;
+
+$scoreboard__margin-bottom: 10vh;
+
+$category__margin-x: 3vw;
+$category__margin-bottom: 1vh;
+
+$scale__margin: 3vw;
+$scale__height: 10vh;
+
+$marker__margin-bottom: 4vw;
+
+$step__width: 4%;
+
+$answer__width: 2%;
+
+$label__margin-bottom: 1vh;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+[app__code] {
+    margin-bottom: $code__margin-bottom;
+    font-size: 4vw;
+}
+
+[app__round] {
+    margin-bottom: $round__margin-bottom;
+    font-size: 3vw;
+}
+
+[app__scoreboard] {
+    display: flex;
+    align-items: center;
+    margin-bottom: $scoreboard__margin-bottom;
+
+    [app__button] {
+        width: 4vw;
+        margin-top: 0;
+    }
+}
+
+[app__score] {
+    width: 20vw;
+    font-size: 3vw;
+    text-align: center;
+}
+
+[app__category] {
+    display: flex;
+    margin: 0 $category__margin-x $category__margin-bottom;
+    align-self: stretch;
+    font-size: 36px;
+}
+
+[app__scale] {
+    align-self: stretch;
+    position: relative;
+    margin: 0 $scale__margin 0;
+    height: $scale__height;
+    background-color: gainsboro;
+}
+
+[app__markers] {
+    display: flex;
+    align-self: stretch;
+    margin: 0 $scale__margin $marker__margin-bottom;
+}
+
+[app__marker] {
+    flex-shrink: 0;
+    position: relative;
+    height: 2vh;
+    width: 5%;
+
+    &:nth-child(2n) {
+        height: 1vh;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -1px;
+        width: 2px;
+        background-color: black;
+    }
+}
+
+[app__value] {
+    position: relative;
+    top: 2vh;
+    left: -2vw;
+    width: 4vw;
+    font-size: 2vw;
+    text-align: center;
+}
+
+[app__indicator] {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -$step__width * 2.5;
+    width: $step__width * 5;
+    background: cornflowerblue;
+}
+
+[app__indicator-2],
+[app__indicator-3],
+[app__indicator-4] {
+    width: 20%;
+    height: $scale__height;
+    line-height: 2;
+    font-size: $scale__height * 0.2;
+    text-align: center;
+}
+
+[app__indicator-2] {
+    background-color: red;
+}
+
+[app__indicator-3] {
+    background-color: yellow;
+}
+
+[app__indicator-4] {
+    background: cornflowerblue;
+}
+
+[app__answer] {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -$answer__width / 2;
+    width: $answer__width;
+    height: $scale__height * 0.6;
+    cursor: pointer;
+}
+
+[app__from] {
+    flex-grow: 1;
+}
+
+[app__button] {
+    margin-top: 2vh;
+    padding: 0.5vw;
+    width: 20vw;
+    border: none;
+    background-color: green;
+    color: white;
+    font-size: 2vw;
+
+    &:disabled {
+        background-color: gainsboro;
+    }
+}
+
+[app__button=danger] {
+    background-color: red;
+}
+
+[app__button=warning] {
+    background-color: orange;
+}
+
+[app__button=info] {
+    background-color: cornflowerblue;
+}
+
+[app__form] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+[app__label] {
+    margin-bottom: $label__margin-bottom;
+    font-size: 2vw;
+}
+
+[app__input] {
+    padding: 0.5vw;
+    border: 1px solid black;
+    font-size: 2vw;
+}
