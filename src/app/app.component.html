@@ -1,3 +1,9 @@
+<h1 app__title>
+    
+    Perfect Match
+
+</h1>
+
 <ng-container *ngIf=" !code && !enterCode ">
 
     <button app__button
@@ -71,7 +77,7 @@
 
         <button app__button="info"
                 type="button"
-                (click)=" points = points ? points - 1 : 0 ">
+                (click)=" score = score ? score - 1 : 0 ">
 
             &minus;
 
@@ -79,13 +85,13 @@
 
         <div app__score>
 
-            {{ points }} {{ points === 1 ? 'Punkt' : 'Punkte' }}
+            {{ score }} {{ score === 1 ? 'Punkt' : 'Punkte' }}
 
         </div>
 
         <button app__button="info"
                 type="button"
-                (click)=" points = points + 1 ">
+                (click)=" score = score + 1 ">
         
             &#43;
         
@@ -123,7 +129,7 @@
              preserveAspectRatio="none"
              [style.left.px]=" answer ">
 
-            <polygon points="1,0 2,2 0,2" />
+            <polygon score="1,0 2,2 0,2" />
 
         </svg>
 

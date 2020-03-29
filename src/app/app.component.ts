@@ -105,7 +105,7 @@ export class AppComponent {
 
     rounds = 7;
 
-    points = 0;
+    score = 0;
 
     category: Category;
 
@@ -169,7 +169,7 @@ export class AppComponent {
         this.code = '';
         this.round = 0;
         this.rounds = 7;
-        this.points = 0;
+        this.score = 0;
     }
 
     private updateAnswer(pageX: number) {
