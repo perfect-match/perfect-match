@@ -61,7 +61,7 @@ $label__margin-bottom: 1vh;
 
 [app__score] {
     width: 12vw;
-    font-size: 1.5vw;
+    font-size: 2vw;
     text-align: center;
 }
 
@@ -69,7 +69,7 @@ $label__margin-bottom: 1vh;
     display: flex;
     margin: 0 $category__margin-x $category__margin-bottom;
     align-self: stretch;
-    font-size: 36px;
+    font-size: 1.5vw;
 }
 
 [app__scale] {
@@ -112,7 +112,7 @@ $label__margin-bottom: 1vh;
     top: 2vh;
     left: -2vw;
     width: 4vw;
-    font-size: 2vw;
+    font-size: 1.5vw;
     text-align: center;
 }
 
