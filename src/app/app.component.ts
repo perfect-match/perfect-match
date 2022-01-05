@@ -1,7 +1,9 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import seedrandom from 'seedrandom';
+
+import { DBService } from 'db';
 
 const categories: Category[] = [
     { from: 'klein', to: 'groß' },
@@ -124,24 +126,51 @@ export class AppComponent {
         document.removeEventListener('pointerup', this.endDrag);
     }
 
-    newGame() {
+    constructor(
+        private dbService: DBService,
+        cd: ChangeDetectorRef
+    ) {
+        dbService.change.subscribe((game: Game) => {
+            this.round = game.round - 1;
+            this.rounds = game.rounds;
+            this.score = game.score;
+
+            console.log(game);
+
+            this.nextRound(true);
+            cd.detectChanges();
+        });
+    }
+
+    async newGame() {
         const random = seedrandom();
 
         for (let i = 0; i < 6; i++) {
             this.code += this.characters[Math.floor(random() * this.characters.length)];
         }
 
-        this.nextRound();
+        await this.dbService.connect(this.code);
+        await this.nextRound();
+        this.dbService.attachment();
     }
 
-    setCode() {
-        this.code = this.form.value.code;
+    async setCode() {
+        const code = this.form.value.code;
+
+        await this.dbService.connect(code);
+
+        const game = await this.dbService.get<Game>();
+
+        this.code = code;
         this.enterCode = false;
+        this.round = game.round - 1;
+        this.rounds = game.rounds;
+        this.score = game.score;
 
-        this.nextRound();
+        this.nextRound(true);
     }
 
-    nextRound() {
+    nextRound(skipUpdate = false) {
         const random = new seedrandom(`${ this.code }.${ this.round }`);
 
         this.round++;
@@ -152,6 +181,18 @@ export class AppComponent {
         if (!this.categories.length) {
             this.categories = categories.slice();
         }
+
+        if (skipUpdate) {
+            return;
+        }
+
+        return this.dbService.put({
+            _id: this.code,
+            name: 'Perfect Match',
+            round:  this.round,
+            rounds: this.rounds,
+            score: this.score
+        });
     }
 
     startDrag(event: PointerEvent) {
@@ -170,6 +211,9 @@ export class AppComponent {
         this.round = 0;
         this.rounds = 7;
         this.score = 0;
+        this.hideIndicator = true;
+
+        this.dbService.disconnect();
     }
 
     private updateAnswer(pageX: number) {
@@ -183,6 +227,20 @@ export class AppComponent {
             scaleRect.width
         );
     }
+
+}
+
+interface Game {
+
+    _id: string;
+
+    name: string;
+
+    round: number;
+
+    rounds: number;
+
+    score: number;
 
 }
 
